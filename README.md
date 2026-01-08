@@ -261,4 +261,5 @@ This project demonstrates:
 
 * **End-to-end engineering:** from raw ingestion to scheduled delivery and multi-channel distribution.
 * **RAG with provenance:** retrieval traces and structured LLM outputs to enable audits and reproducible reasoning.
+* 
 * **Production thinking:** scheduler, fallbacks, secrets guidance, and modular adapters make this far more than a prototype — it's a production-ready template for automated reporting systems.
