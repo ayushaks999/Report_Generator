@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/) [![Streamlit](https://img.shields.io/badge/Streamlit-app-orange.svg)](https://streamlit.io) [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
 
-**Tagline:** *Production-grade, agentic RAG system that turns sales & marketing data into repeatable, auditable executive reports — with publication-quality charts and multi-channel delivery.*
+**Tagline:* *I built a production-grade, agentic RAG system that turns sales & marketing data into repeatable, auditable executive reports — with publication-quality charts and multi-channel delivery.**
 
 ---
 
@@ -10,7 +10,7 @@
 
 ## 🔎 Executive summary
 
-This repository implements a complete, production-oriented pipeline to generate automated sales & marketing reports:
+This repository is my end-to-end pipeline to generate automated sales & marketing reports:
 
 * Ingests and indexes business data into a vector store (ChromaDB).
 * Uses Retrieval-Augmented Generation (RAG) + multi-agent orchestration (AutoGen preferred, GROQ/OpenAI fallback) to analyze results.
@@ -338,11 +338,3 @@ To make the README more informative and impressive I added the following concise
 
 ---
 
-*If you want, I can now:*
-
-* fold these additions into a compact one-page summary for recruiters, or
-* inject SLA-like statements and runbook snippets into the README (incident handling), or
-* update the canvas README directly to add example outputs (report snippets) and a short API reference.
-* 
-
-Tell me which of these you'd like next and I'll update the canvas accordingly.
