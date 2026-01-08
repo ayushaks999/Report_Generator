@@ -1,0 +1,15 @@
+pyautogen
+openai
+chromadb
+python-dotenv
+pandas
+schedule
+
+pytz
+matplotlib
+plotly
+kaleido
+telethon
+Pillow
+httpx
+numpy

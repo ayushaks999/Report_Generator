@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Database
+chroma_db/
+*.db
+*.sqlite3
+
+# Generated files
+*.png
+*.jpg
+*.jpeg
+demo_*.txt
+daily_*.txt
+test_*.txt
+*_report_*.txt
+
+# Telegram session
+*.session
+*.session-journal
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Temporary
+tmp/
+temp/
