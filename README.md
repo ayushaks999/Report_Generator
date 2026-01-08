@@ -21,7 +21,7 @@ This repository implements a complete, production-oriented pipeline to generate 
 
 ---
 
-## 🚀 Key highlights (recruiter-friendly)
+## 🚀 Key highlights
 
 * **Agentic orchestration** — Data Analyst + Report Writer agents coordinated by a User Proxy for auditable multi-step reasoning and modular responsibilities.
 * **RAG with provenance** — retrieval traces (`_mcp_chunks`) and constrained JSON outputs for downstream parsing and audit.
