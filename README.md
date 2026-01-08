@@ -17,7 +17,7 @@ This repository implements a complete, production-oriented pipeline to generate 
 * Produces polished executive reports with inline visualizations, PDF/HTML exports, and delivers via **HTML email** and **Telegram**.
 * Built for reliability: timezone-aware scheduling, safe truncation, detailed retrieval traces for explainability, model fallbacks and robust logging for production debugging.
 
-This README is designed to make the engineering depth and production mindset immediately visible to reviewers and hiring managers.
+
 
 ---
 
