@@ -1,76 +1,130 @@
 # AI Sales & Marketing Report Generator
 
-> Production-grade, agentic RAG system for automated analytics reporting — built for reliability, explainability and production readiness.
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/) [![Streamlit](https://img.shields.io/badge/Streamlit-app-orange.svg)](https://streamlit.io) [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
+
+**Tagline:** *Production-grade, agentic RAG system that turns sales & marketing data into repeatable, auditable executive reports — with publication-quality charts and multi-channel delivery.*
 
 ---
 
-## Project summary
+## 🔎 Executive summary
 
-A complete end-to-end pipeline that retrieves sales & marketing data from a vector store (ChromaDB), performs multi-agent analysis (Microsoft AutoGen when available, GROQ/OpenAI-compatible fallback), generates polished executive reports, produces publication-quality visualizations, and delivers results via **HTML email (embedded charts)** and **Telegram**. This repository includes an interactive Streamlit demo, a scheduler for automated runs, and modular adapters for vector DBs and delivery channels.
+This repository implements a complete, production-oriented pipeline to generate automated sales & marketing reports:
 
----
+* Ingests and indexes business data into a vector store (ChromaDB).
+* Uses Retrieval-Augmented Generation (RAG) + multi-agent orchestration (AutoGen preferred, GROQ/OpenAI fallback) to analyze results.
+* Produces polished executive reports with inline visualizations, PDF/HTML exports, and delivers via **HTML email** and **Telegram**.
+* Built for reliability: timezone-aware scheduling, safe truncation, detailed retrieval traces for explainability, model fallbacks and robust logging for production debugging.
 
-## Key highlights (recruiter-friendly)
-
-* Agentic multi-agent orchestration: Data Analyst + Report Writer agents coordinated by a User Proxy for auditable reasoning.
-* RAG-powered context: robust retrieval and prompt-safe formatting for LLM inputs.
-* GROQ / OpenAI-compatible fallback with retry and model fallback semantics.
-* Multi-channel delivery: HTML email with inline charts + Telethon-based Telegram sender (supports sync/async exports).
-* Production-first: scheduler (timezone aware), safe truncation, logging, and modular architecture.
+This README is designed to make the engineering depth and production mindset immediately visible to reviewers and hiring managers.
 
 ---
 
-## Quick start
+## 🚀 Key highlights (recruiter-friendly)
 
-1. Clone the repo and open it in VS Code.
-2. Create and activate a virtual environment:
+* **Agentic orchestration** — Data Analyst + Report Writer agents coordinated by a User Proxy for auditable multi-step reasoning and modular responsibilities.
+* **RAG with provenance** — retrieval traces (`_mcp_chunks`) and constrained JSON outputs for downstream parsing and audit.
+* **Multi-model & fallback semantics** — GROQ / OpenAI-compatible interface with retries, model fallback and safe parsing.
+* **Publication-ready visuals** — matplotlib chart generation with exportable images for inline HTML emails.
+* **Multi-channel delivery** — HTML email with embedded charts + Telegram file delivery (sync/async support).
+* **Production operationalism** — scheduler (timezone-aware), modular adapters (Chroma, other vector DBs), safe prompt truncation, and structured logging for traceability.
+
+---
+
+## 🧩 Architecture & files (high level)
+
+* `agent.py` — multi-agent orchestration (AutoGen preferred, GROQ fallback).
+* `rag_retrieval.py` — retrieval, context assembly and prompt-safe formatting (MCP pattern).
+* `vector_db.py` — ChromaDB ingestion & query adapter (pluggable).
+* `visualizations.py` — matplotlib chart generation & `generate_all_charts()`.
+* `email_sender_html.py` — HTML email builder with inline images and attachments.
+* `telegram_sender.py` — Telethon integration and delivery code (supports test mode).
+* `scheduler.py` — timezone-aware scheduler and `now` test run.
+* `app.py` — Streamlit demo for manual generation & inspection.
+* `screenshots/` — pre-rendered previews for README and QA.
+
+---
+
+## 🛠 Technology stack (concise)
+
+**Language / Runtime:** Python 3.8+
+**Web UI:** Streamlit (interactive demo)
+**Vector store:** ChromaDB (embeddings-driven retrieval)
+**LLM interfaces:** OpenAI-compatible / GROQ fallback / AutoGen multi-agent orchestration
+**Charts:** matplotlib (scripted, reproducible PNGs/SVGs)
+**Delivery:** SMTP (HTML email) + Telethon (Telegram)
+**Persistence:** joblib/Parquet/SQLite (local demo) — recommendations for PostgreSQL/managed secrets in prod
+**Ops & testing:** python-dotenv, logging, pytest (recommended), Dockerfile for reproducible deployments
+
+---
+
+## ✅ What it does (features)
+
+* **RAG-driven analysis:** Query dataset, retrieve top vector chunks, assemble MCP (index summary + .csv preview + vector hits), and run structured LLM prompts.
+* **Multi-agent audit trail:** Agents record stepwise decisions and final explanations; outputs include retrieval traces and reasoning summaries for compliance or review.
+* **Robust prompt hygiene:** Prompts enforce JSON-only responses (`{answer, sql, references}`) and validated outputs; fallback to deterministic parser if LLM fails.
+* **Publication charts:** Automated chart generation for executive dashboards (PNG/SVG) — suitable for embedding directly in emails.
+* **Delivery channels:** HTML email with embedded charts and downloadable attachments; Telegram sender for Slack/Telegram distribution.
+* **Scheduler & test-mode:** Timezone-aware scheduler with `now` mode for local testing and CI-friendly runs.
+* **Safe-mode & truncation:** Token-aware context trimming and safe fallbacks to avoid LLM timeouts and hallucinations.
+
+---
+
+## Quick start — local development
+
+1. Clone repository and open in VS Code:
+
+```bash
+git clone <repo-url>
+cd <repo>
+```
+
+2. Create & activate virtual environment:
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# macOS / Linux
+source .venv/bin/activate
+# Windows (Powershell)
+.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
-3. Copy the `.env` content below into `.env` in the project root (for local testing only):
+3. Create `.env` (example below) in project root (local testing only — do **not** commit secrets):
 
 ```env
 OPENAI_API_KEY=
-GMAIL_USER=ayushaks9990@gmail.com
+GMAIL_USER=
 GMAIL_APP_PASSWORD=
-RECIPIENT_EMAIL=ayushaks999@gmail.com
+RECIPIENT_EMAIL=
 TELEGRAM_API_ID=
 TELEGRAM_API_HASH=
-TELEGRAM_PHONE=+916290591230
+TELEGRAM_PHONE=
 GROQ_API_KEY=
 GROQ_API_URL=https://api.groq.com/openai/v1/chat/completions
 GROQ_MODEL=llama-3.3-70b-versatile
 ```
 
-> **Security note:** the `.env` content above was provided for demonstration by the project owner. **Do not commit `.env` or any secret values to source control.** Use a secrets manager (GitHub Secrets, AWS/GCP/Azure secret stores) in production.
+> **Security note:** For production use a secrets manager (AWS Secrets Manager, GCP Secret Manager, GitHub Actions secrets) and never commit `.env` to source control.
 
----
-
-## Run the project
-
-* Streamlit demo (interactive):
+4. Run Streamlit demo:
 
 ```bash
 streamlit run app.py
 ```
 
-* Generate charts locally:
+5. Generate all charts locally:
 
 ```bash
 python -c "from visualizations import generate_all_charts; print(generate_all_charts())"
 ```
 
-* Send a test Telegram message (may prompt for login the first time):
+6. Test Telegram delivery:
 
 ```bash
 python telegram_sender.py --test
 ```
 
-* Run full scheduled pipeline once (test mode):
+7. Run the scheduled pipeline once (test mode):
 
 ```bash
 python scheduler.py now
@@ -78,22 +132,77 @@ python scheduler.py now
 
 ---
 
-## Files & structure (high level)
+## Operational recommendations
 
-* `agent.py` — multi-agent orchestration (AutoGen preferred, GROQ fallback)
-* `rag_retrieval.py` — vector DB normalization and prompt context creation
-* `vector_db.py` — ChromaDB ingestion and query adapters
-* `visualizations.py` — matplotlib charts + `generate_all_charts()`
-* `email_sender_html.py` — HTML email + embedded images + attachments
-* `telegram_sender.py` — Telethon integration for file delivery
-* `scheduler.py` — timezone-aware schedule and `now` testing mode
-* `app.py` — Streamlit frontend for demos and manual report generation
+* **Demo / trial:** SQLite + local Chroma files; ingest a small dataset (`rows_to_index` = 100–1,000).
+* **Production:** PostgreSQL for relational persistence, managed Chroma or Redis/DuckDB backends, run on a server with >= 8–16GB RAM for moderate scale.
+* **Secrets & keys:** Use a vault or cloud secret manager; rotate API keys regularly.
+* **Monitoring:** Push logs to a central logging service (ELK/CloudWatch/Stackdriver) and monitor scheduler runs and LLM errors.
+* **Retention & cleanup:** Archive or rotate stored raw data (.csv/.nc/.parquet) on a regular schedule to limit storage growth.
 
 ---
 
-## Screenshots
+## Diagrams (Mermaid)
 
-Below are the screenshots saved in the `screenshots/` folder of this repo. They are embedded here for quick review in the GitHub README (relative paths):
+> Paste these into a Markdown viewer that supports Mermaid (GitHub, GitLab, mermaid.live) to render diagrams.
+
+### System architecture (high level)
+
+```mermaid
+flowchart TD
+  subgraph REMOTE
+    DATA["Remote Sales/Marketing Data\n(API / CSV / DB)"]
+  end
+
+  subgraph LOCAL
+    INGEST["Ingest & Normalizer"]
+    CHROMA["ChromaDB (vector store)"]
+    DB["Relational DB (SQLite/Postgres)"]
+    AGENTS["Agents: DataAnalyst + ReportWriter"]
+    VIS["Visualizations (matplotlib)"]
+    EMAIL["Email Sender (HTML)"]
+    TELE["Telegram Sender"]
+    UI["Streamlit UI"]
+    SCHED["Scheduler"]
+  end
+
+  DATA --> INGEST --> DB
+  INGEST --> CHROMA
+  UI --> AGENTS
+  AGENTS --> CHROMA
+  AGENTS --> DB
+  AGENTS --> VIS
+  VIS --> EMAIL
+  VIS --> TELE
+  SCHED --> AGENTS
+  UI --> VIS
+```
+
+### RAG request lifecycle (sequence)
+
+```mermaid
+sequenceDiagram
+  participant User
+  participant UI
+  participant Retriever
+  participant Chroma
+  participant LLM
+  participant Writer
+
+  User->>UI: Request report / question
+  UI->>Retriever: Build MCP context (index + previews)
+  Retriever->>Chroma: Vector query
+  Chroma-->>Retriever: Top hits
+  Retriever->>LLM: Prompt + context (JSON enforced)
+  LLM-->>Writer: Structured response {answer, sql, references}
+  Writer-->>UI: Final report + charts
+```
+
+---
+
+## Screenshots (embedded)
+
+Use the images in `screenshots/` to show previews in the README:
 
 <p align="center">
   <img src="screenshots/Report%20(1).png" alt="Report 1" width="700"/>
@@ -118,3 +227,46 @@ Below are the screenshots saved in the `screenshots/` folder of this repo. They 
 </p>
 
 ---
+
+## Development notes & best practices
+
+* **Structured outputs:** adopt JSON-only LLM outputs in prompts to make responses machine-parseable and auditable.
+* **MCP context:** assemble multiple evidence sources (index summaries, raw previews, vector hits) — trim aggressively for long contexts.
+* **Fail-safe parsing:** always validate LLM outputs and fallback to deterministic parsers or rerun with a stricter system prompt.
+* **Test harness:** maintain a `--test` flag for senders and `scheduler.py now` for CI-friendly runs.
+* **Reproducibility:** persist chart-generating code and the raw CSV/Parquet used to make each chart in the run metadata.
+
+---
+
+## Contributing
+
+1. Fork the repo and make a branch.
+2. Run tests and linters (`pytest`, `black`, `isort`).
+3. Submit a PR with clear description and changelog entry.
+4. For breaking changes, include migration guidance for config and storage.
+
+---
+
+## License
+
+MIT — see `LICENSE` for details.
+
+---
+
+## Final notes — why this stands out
+
+This project demonstrates:
+
+* **End-to-end engineering:** from raw ingestion to scheduled delivery and multi-channel distribution.
+* **RAG with provenance:** retrieval traces and structured LLM outputs to enable audits and reproducible reasoning.
+* **Production thinking:** scheduler, fallbacks, secrets guidance, and modular adapters make this far more than a prototype — it's a production-ready template for automated reporting systems.
+
+---
+
+If you'd like, I can:
+
+* Convert this into a single `README.md` file ready to paste into your repo, or
+* Produce a compact one-page recruiter summary, or
+* Add a short demo GIF/video embed and instructions for recording it.
+
+Tell me which one you want next.
