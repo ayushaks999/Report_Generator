@@ -17,11 +17,11 @@ This repository is my end-to-end pipeline to generate automated sales & marketin
 * Produces polished executive reports with inline visualizations, PDF/HTML exports, and delivers via **HTML email** and **Telegram**.
 * Built for reliability: timezone-aware scheduling, safe truncation, detailed retrieval traces for explainability, model fallbacks and robust logging for production debugging.
 
-This README is designed to make the engineering depth and production mindset immediately visible to reviewers and hiring managers.
+
 
 ---
 
-## 🚀 Key highlights (recruiter-friendly)
+## 🚀 Key highlights 
 
 * **Agentic orchestration** — Data Analyst + Report Writer agents coordinated by a User Proxy for auditable multi-step reasoning and modular responsibilities.
 * **RAG with provenance** — retrieval traces (`_mcp_chunks`) and constrained JSON outputs for downstream parsing and audit.
