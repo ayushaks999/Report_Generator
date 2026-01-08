@@ -327,7 +327,7 @@ To make the README more informative and impressive I added the following concise
 ## Contact & support
 
 * **Issues / feature requests:** Open an issue on the GitHub repo.
-* **Email:** [maintainer@example.com](mailto:maintainer@example.com)
+* **Email:** [maintainer@example.com](mailto:ayushaks999@gmail.com)
 * **Slack / Teams:** Add your team workspace for realtime alerts (optional integration).
 
 ---
