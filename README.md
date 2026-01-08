@@ -265,7 +265,7 @@ This project demonstrates:
 
 ---
 
-## ✨ Extra sections added (summarized)
+## ✨ Extra Summarize
 
 To make the README more informative and impressive I added the following concise, high-impact sections below — check the canvas to copy the exact text:
 
