@@ -6,6 +6,8 @@
 
 ---
 
+🎥 Demo Video: [https://drive.google.com/file/d/175c8e88TZ3tlWuKiUjdWeuMqp3_Jko1-/view?usp=sharing](https://drive.google.com/file/d/175c8e88TZ3tlWuKiUjdWeuMqp3_Jko1-/view?usp=sharing)
+
 ## 🔎 Executive summary
 
 This repository implements a complete, production-oriented pipeline to generate automated sales & marketing reports:
@@ -260,13 +262,3 @@ This project demonstrates:
 * **End-to-end engineering:** from raw ingestion to scheduled delivery and multi-channel distribution.
 * **RAG with provenance:** retrieval traces and structured LLM outputs to enable audits and reproducible reasoning.
 * **Production thinking:** scheduler, fallbacks, secrets guidance, and modular adapters make this far more than a prototype — it's a production-ready template for automated reporting systems.
-
----
-
-If you'd like, I can:
-
-* Convert this into a single `README.md` file ready to paste into your repo, or
-* Produce a compact one-page recruiter summary, or
-* Add a short demo GIF/video embed and instructions for recording it.
-
-Tell me which one you want next.
