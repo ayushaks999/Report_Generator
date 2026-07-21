@@ -1,12 +1,5 @@
 """
 visualizations.py
-Enhanced visualization module compatible with:
-- app.py
-- report_generator.py
-- agent.py
-- rag_retrieval.py
-- vector_db.py
-
 Generates charts into charts/ and returns list of file paths.
 """
 
