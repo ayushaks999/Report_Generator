@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import Optional, Any
 import os
 import time
-import traceback
+import traceback # error Then The debuggings
 import json
 import asyncio
 
@@ -279,7 +279,7 @@ def _groq_models_list():
     except Exception as e:
         return None, str(e), base
 
-
+# Make Groq work with AutoGen's OpenAIChatCompletionClient, because that client expects a base URL (https://api.groq.com/openai/v1) rather than the full chat completions endpoint.
 def _groq_base_url() -> str:
     """
     Derive the OpenAI-compatible base_url for AutoGen from GROQ_API_URL.
@@ -298,7 +298,8 @@ def _groq_base_url() -> str:
         return api_url.rsplit("/chat/completions", 1)[0].rstrip("/")
     return "https://api.groq.com/openai/v1"
 
-
+# Is responsible for creating and configuring an AutoGen model client that communicates with the Groq API.
+# It acts as a bridge between your AutoGen agents and Groq's OpenAI-compatible API.
 def _make_autogen_client(model: str):
     """
     Create an AutoGen OpenAI-compatible model client for Groq.
