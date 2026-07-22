@@ -6,8 +6,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import List, Optional, Sequence, Tuple
 
-from telethon import TelegramClient
-from telethon.tl.functions.contacts import ImportContactsRequest
+from telethon import TelegramClient # Telegram client that connects your Python program to Telegram.
+from telethon.tl.functions.contacts import ImportContactsRequest # Adds a phone number to your Telegram contacts.
 from telethon.tl.types import InputPhoneContact
 
 # ============================================================
@@ -357,7 +357,7 @@ def run_async(coro):
 # ============================================================
 # CLI
 # ============================================================
-
+# Then The Parse_args() reads any command-line options (like --phone or --test) so they can override the default settings in config.py.
 def parse_args():
     import argparse
 
