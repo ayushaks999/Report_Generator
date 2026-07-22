@@ -38,7 +38,7 @@ if not logger.handlers:
 
 def safe_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Chroma metadata only supports primitive values.
+    Chroma metadata only supports primitive values int float bool and strings.
     """
 
     cleaned = {}
@@ -132,11 +132,9 @@ def load_data_to_vectordb(
 ):
     """
     Load sales + marketing records into ChromaDB.
-
-    Uses upsert() when available.
     """
-
     documents = []
+    
     metadatas = []
     ids = []
 
@@ -300,7 +298,7 @@ def query_vectordb(
 # ------------------------------------------------------------------
 # Statistics
 # ------------------------------------------------------------------
-
+# Tells How many documents are in the collection
 def get_collection_stats(collection):
     """
     Basic collection stats.
@@ -313,7 +311,7 @@ def get_collection_stats(collection):
         "total_documents": count,
     }
 
-
+# How many belong to each category
 def get_collection_breakdown(collection):
     """
     Counts docs by type.
@@ -356,7 +354,7 @@ def get_collection_breakdown(collection):
 # ------------------------------------------------------------------
 # Maintenance
 # ------------------------------------------------------------------
-
+# Then The delete older than 30 days
 def clear_collection(
     client,
     collection_name,
