@@ -4,6 +4,7 @@
   <img src="https://img.shields.io/badge/Python-3.8%2B-blue.svg" alt="Python 3.8+">
   <img src="https://img.shields.io/badge/Streamlit-App-orange.svg" alt="Streamlit">
   <img src="https://img.shields.io/badge/ChromaDB-Vector%20Store-success.svg" alt="ChromaDB">
+  
   <img src="https://img.shields.io/badge/RAG-Agentic-purple.svg" alt="RAG">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License">
 </p>
