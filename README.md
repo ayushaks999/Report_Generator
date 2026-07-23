@@ -538,15 +538,24 @@ print(path)
 
 ## Screenshots
 
-Add your screenshots here to show the app and outputs in action.
-
-```html
 <p align="center">
-  <img src="screenshots/Report%20(1).png" alt="Report Preview 1" width="700" />
+  <img src="screenshots/Report%20(1).png" alt="Report 1" width="700" />
 </p>
 
 <p align="center">
-  <img src="screenshots/Report%20(2).png" alt="Report Preview 2" width="700" />
+  <img src="screenshots/Report%20(2).png" alt="Report 2" width="700" />
+</p>
+
+<p align="center">
+  <img src="screenshots/Report%20(3).png" alt="Report 3" width="700" />
+</p>
+
+<p align="center">
+  <img src="screenshots/Report%20(4).png" alt="Report 4" width="700" />
+</p>
+
+<p align="center">
+  <img src="screenshots/Report%20(5).png" alt="Report 5" width="700" />
 </p>
 ```
 
